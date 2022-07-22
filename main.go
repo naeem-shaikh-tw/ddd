@@ -1,16 +1,29 @@
-package ddd
+package main
 
 import (
-	"ddd/apple_pencil"
 	"ddd/cart"
-	"ddd/sony_wireless_headphone"
+	"ddd/item"
+	"ddd/product"
+	"fmt"
 )
 
 func main() {
 	c := cart.NewCart()
-	applePencil := apple_pencil.NewApplePencil()
-	c.Add(applePencil, 1)
-	c.Add(sony_wireless_headphone.NewSonyWirelessHeadphone(), 1)
 
-	c.Remove(applePencil)
+	// Add Apple Pencil
+	applePencil := product.NewProduct("Apple Pencil")
+	applePencilItem := item.NewItem(applePencil, 2)
+	c.Add(applePencilItem)
+
+	// Add Sony Wireless Headphone
+	sonyWirelessHeadphone := product.NewProduct("Sony wireless headphone")
+	c.Add(item.NewItem(sonyWirelessHeadphone, 1))
+
+	fmt.Println("Cart: ", c.GetItems())
+
+	// Remove Apple Pencil
+	c.Remove(applePencilItem)
+	
+	removedItems := c.GetRemovedItems()
+	fmt.Println("Removed Items:", removedItems)
 }
