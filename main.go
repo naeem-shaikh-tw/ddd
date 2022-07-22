@@ -23,7 +23,14 @@ func main() {
 
 	// Remove Apple Pencil
 	c.Remove(applePencilItem)
-	
+
 	removedItems := c.GetRemovedItems()
 	fmt.Println("Removed Items:", removedItems)
+
+	c1 := cart.NewCart()
+	c2 := cart.NewCart()
+	c1.Add(applePencilItem)
+	c2.Add(applePencilItem)
+	fmt.Println(c1.Equals(c1)) // true
+	fmt.Println(c1.Equals(c2)) // false
 }
