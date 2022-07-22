@@ -1,6 +1,8 @@
 package order
 
-import "ddd/product"
+import (
+	"ddd/domain/e-commerce/product"
+)
 
 type Order struct {
 	Products []product.Product

@@ -1,8 +1,8 @@
 package cart
 
 import (
-	"ddd/item"
-	"ddd/product"
+	"ddd/domain/e-commerce/item"
+	"ddd/domain/e-commerce/product"
 )
 
 var id int = 0

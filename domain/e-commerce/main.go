@@ -1,12 +1,12 @@
 package main
 
 import (
-	"ddd/cart"
-	"ddd/domain_service/competitor_based_pricer"
-	"ddd/item"
-	"ddd/order"
-	"ddd/price"
-	"ddd/product"
+	"ddd/domain/e-commerce/cart"
+	"ddd/domain/e-commerce/domain_service/competitor_based_pricer"
+	"ddd/domain/e-commerce/item"
+	"ddd/domain/e-commerce/order"
+	"ddd/domain/e-commerce/price"
+	"ddd/domain/e-commerce/product"
 	"fmt"
 )
 
@@ -45,5 +45,5 @@ func main() {
 
 	products := c.Checkout()
 	o := order.NewOrder(products)
-	o.GetOrder()
+	fmt.Println("Order: ", o.GetOrder())
 }

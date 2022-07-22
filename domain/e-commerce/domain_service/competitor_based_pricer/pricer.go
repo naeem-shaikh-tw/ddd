@@ -1,7 +1,7 @@
 package competitor_based_pricer
 
 import (
-	"ddd/price"
+	"ddd/domain/e-commerce/price"
 )
 
 func GetDiscountedPrice(discount float64, competitorPrice price.Price) price.Price {

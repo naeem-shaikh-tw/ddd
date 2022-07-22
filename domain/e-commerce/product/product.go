@@ -1,6 +1,8 @@
 package product
 
-import "ddd/price"
+import (
+	"ddd/domain/e-commerce/price"
+)
 
 type Product struct {
 	Name  string

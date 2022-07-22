@@ -1,6 +1,8 @@
 package item
 
-import "ddd/product"
+import (
+	"ddd/domain/e-commerce/product"
+)
 
 type Item struct {
 	Product  product.Product
