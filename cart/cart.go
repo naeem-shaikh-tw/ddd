@@ -2,6 +2,7 @@ package cart
 
 import (
 	"ddd/item"
+	"ddd/product"
 )
 
 var id int = 0
@@ -10,6 +11,7 @@ type Cart struct {
 	Id           int
 	Items        []item.Item
 	RemovedItems []item.Item
+	CheckedOut   bool
 }
 
 func (c *Cart) Add(i item.Item) {
@@ -36,6 +38,20 @@ func (c *Cart) GetItems() []item.Item {
 func (c *Cart) Equals(c2 Cart) bool {
 	return c.Id == c2.Id
 }
+
+func (c *Cart) getProducts() []product.Product {
+	var listOfProducts []product.Product
+	for index := 0; index < len(c.Items); index++ {
+		listOfProducts = append(listOfProducts, c.Items[index].GetProducts()...)
+	}
+	return listOfProducts
+}
+
+func (c *Cart) Checkout() []product.Product {
+	c.CheckedOut = true
+	return c.getProducts()
+}
+
 func NewCart() Cart {
 	id += 1
 	return Cart{

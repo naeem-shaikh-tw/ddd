@@ -4,6 +4,7 @@ import (
 	"ddd/cart"
 	"ddd/domain_service/competitor_based_pricer"
 	"ddd/item"
+	"ddd/order"
 	"ddd/price"
 	"ddd/product"
 	"fmt"
@@ -25,12 +26,12 @@ func main() {
 	sonyWirelessHeadphoneDiscountedPrice := competitor_based_pricer.GetDiscountedPrice(discount, price.NewPrice(priceMap["Sony wireless headphone"], "USD"))
 
 	sonyWirelessHeadphone := product.NewProduct("Sony wireless headphone", sonyWirelessHeadphoneDiscountedPrice)
-	c.Add(item.NewItem(sonyWirelessHeadphone, 1))
+	c.Add(item.NewItem(sonyWirelessHeadphone, 2))
 
 	fmt.Println("Cart: ", c.GetItems())
 
 	// Remove Apple Pencil
-	c.Remove(applePencilItem)
+	//c.Remove(applePencilItem)
 
 	removedItems := c.GetRemovedItems()
 	fmt.Println("Removed Items:", removedItems)
@@ -41,4 +42,8 @@ func main() {
 	c2.Add(applePencilItem)
 	fmt.Println(c1.Equals(c1)) // true
 	fmt.Println(c1.Equals(c2)) // false
+
+	products := c.Checkout()
+	o := order.NewOrder(products)
+	o.GetOrder()
 }
