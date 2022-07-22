@@ -1,6 +1,8 @@
 package cart
 
-import "ddd/item"
+import (
+	"ddd/item"
+)
 
 type Cart struct {
 	Items []item.Item
