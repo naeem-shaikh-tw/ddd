@@ -8,6 +8,9 @@ import (
 
 func main() {
 	c := cart.NewCart()
-	c.Add(apple_pencil.NewApplePencil(), 1)
+	applePencil := apple_pencil.NewApplePencil()
+	c.Add(applePencil, 1)
 	c.Add(sony_wireless_headphone.NewSonyWirelessHeadphone(), 1)
+
+	c.Remove(applePencil)
 }

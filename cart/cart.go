@@ -12,6 +12,14 @@ func (c Cart) Add(i item.Item, q int) {
 	}
 }
 
+func (c Cart) Remove(i item.Item) {
+	for index := 0; index < len(c.Items); index++ {
+		if c.Items[index] == i {
+			c.Items = append(c.Items[:index], c.Items[index+1:]...)
+		}
+	}
+
+}
 func NewCart() Cart {
 	return Cart{}
 }
