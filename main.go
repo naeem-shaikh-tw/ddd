@@ -2,6 +2,7 @@ package main
 
 import (
 	"ddd/cart"
+	"ddd/domain_service/competitor_based_pricer"
 	"ddd/item"
 	"ddd/price"
 	"ddd/product"
@@ -9,15 +10,21 @@ import (
 )
 
 func main() {
+	priceMap := map[string]float64{"Apple Pencil": 5, "Sony wireless headphone": 30}
+	var discount float64 = 10
+
 	c := cart.NewCart()
 
 	// Add Apple Pencil
-	applePencil := product.NewProduct("Apple Pencil", price.NewPrice(20, "USD"))
+	applePencilDiscountedPrice := competitor_based_pricer.GetDiscountedPrice(discount, price.NewPrice(priceMap["Apple Pencil"], "USD"))
+	applePencil := product.NewProduct("Apple Pencil", applePencilDiscountedPrice)
 	applePencilItem := item.NewItem(applePencil, 2)
 	c.Add(applePencilItem)
 
 	// Add Sony Wireless Headphone
-	sonyWirelessHeadphone := product.NewProduct("Sony wireless headphone", price.NewPrice(20, "USD"))
+	sonyWirelessHeadphoneDiscountedPrice := competitor_based_pricer.GetDiscountedPrice(discount, price.NewPrice(priceMap["Sony wireless headphone"], "USD"))
+
+	sonyWirelessHeadphone := product.NewProduct("Sony wireless headphone", sonyWirelessHeadphoneDiscountedPrice)
 	c.Add(item.NewItem(sonyWirelessHeadphone, 1))
 
 	fmt.Println("Cart: ", c.GetItems())
