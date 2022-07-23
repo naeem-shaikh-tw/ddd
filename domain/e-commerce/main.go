@@ -3,6 +3,7 @@ package main
 import (
 	"ddd/domain/e-commerce/cart"
 	"ddd/domain/e-commerce/domain_service/competitor_based_pricer"
+	"ddd/domain/e-commerce/domain_service/shipment_cost_calculator"
 	"ddd/domain/e-commerce/item"
 	"ddd/domain/e-commerce/order"
 	"ddd/domain/e-commerce/price"
@@ -18,14 +19,14 @@ func main() {
 
 	// Add Apple Pencil
 	applePencilDiscountedPrice := competitor_based_pricer.GetDiscountedPrice(discount, price.NewPrice(priceMap["Apple Pencil"], "USD"))
-	applePencil := product.NewProduct("Apple Pencil", applePencilDiscountedPrice)
+	applePencil := product.NewProduct("Apple Pencil", applePencilDiscountedPrice, 200)
 	applePencilItem := item.NewItem(applePencil, 2)
 	c.Add(applePencilItem)
 
 	// Add Sony Wireless Headphone
 	sonyWirelessHeadphoneDiscountedPrice := competitor_based_pricer.GetDiscountedPrice(discount, price.NewPrice(priceMap["Sony wireless headphone"], "USD"))
 
-	sonyWirelessHeadphone := product.NewProduct("Sony wireless headphone", sonyWirelessHeadphoneDiscountedPrice)
+	sonyWirelessHeadphone := product.NewProduct("Sony wireless headphone", sonyWirelessHeadphoneDiscountedPrice, 200)
 	c.Add(item.NewItem(sonyWirelessHeadphone, 2))
 
 	fmt.Println("Cart: ", c.GetItems())
@@ -46,4 +47,7 @@ func main() {
 	products := c.Checkout()
 	o := order.NewOrder(products)
 	fmt.Println("Order: ", o.GetOrder())
+
+	fmt.Println("Total order cost", o.Cost())
+	fmt.Println("Shipment Cost", shipment_cost_calculator.CalculateShipmentCost(o))
 }
